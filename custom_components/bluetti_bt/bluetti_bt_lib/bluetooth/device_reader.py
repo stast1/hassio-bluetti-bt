@@ -179,6 +179,12 @@ class DeviceReader:
                             # Ignore errors here
                             pass
                         self.has_notifier = False
+                    
+                    # Clear notification state before disconnect to avoid warnings
+                    self.notify_future = None
+                    self.current_command = None
+                    self.notify_response = bytearray()
+                    
                     await self.client.disconnect()
 
             # Check if dict is empty
@@ -217,6 +223,9 @@ class DeviceReader:
         except (BadConnectionError, BleakError) as err:
             # Ignore other errors
             pass
+        finally:
+            # Clear the future to prevent late notifications from causing warnings
+            self.notify_future = None
 
         # caught an exception, return empty bytes object
         return bytes()
@@ -225,8 +234,9 @@ class DeviceReader:
         """Handle bt data."""
 
         # Ignore notifications we don't expect
+        # This can happen during disconnect or when no command is pending
         if self.notify_future is None or self.notify_future.done():
-            _LOGGER.warning("Unexpected notification")
+            _LOGGER.debug("Ignoring notification (no pending command): %s bytes", len(data))
             return
 
         # If something went wrong, we might get weird data.
