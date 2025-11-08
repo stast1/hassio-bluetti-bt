@@ -4,8 +4,8 @@
       "init": {
         "data": {
           "use_controls": "Usar os comandos",
-          "persistent_conn": "Ligação presistente (necessario reninciar)",
-          "polling_interval": "Intervalo deatualização (necessario reninciar)"
+          "persistent_conn": "Ligação persistente",
+          "polling_interval": "Intervalo de atualização em segundos"
         }
       }
     },
