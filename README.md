@@ -43,3 +43,20 @@ Home Assistant emits a warning if `BleakClient.connect()` is called directly:
 "BleakClient.connect() called without bleak-retry-connector. For reliable connection establishment, use bleak_retry_connector.establish_connection()."
 
 This integration now uses `bleak-retry-connector` to establish BLE connections with retry and service cache. This reduces transient connection failures and improves stability.
+
+## Reloading the integration
+
+The integration now supports reloading from the Home Assistant UI. This allows you to:
+
+- Apply configuration changes without restarting Home Assistant
+- Reconnect to the device if connection issues occur
+- Update the integration after changing options
+
+To reload the integration:
+
+1. Go to **Settings** → **Devices & Services**
+2. Find the **Bluetti BT** integration
+3. Click the three dots menu (⋮)
+4. Select **Reload**
+
+The integration will cleanly disconnect from the device, unload all entities, and then reconnect with the current configuration.
