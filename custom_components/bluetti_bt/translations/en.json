@@ -22,6 +22,7 @@
       }
     },
     "abort": {
+      "no_unconfigured_devices": "No unconfigured devices found",
       "invalid_interval": "Invalid polling interval. Use 5 seconds or more",
       "invalid_timeout": "Invalid polling timeout. Use 1 second or more",
       "invalid_retries": "Invalid max retries. Use 1 or more"
