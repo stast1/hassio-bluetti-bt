@@ -35,3 +35,11 @@ After the installation, you can use this button to install the integration:
 ### Available controls:
 If enabled in the Integration options (you need to reload the integration if you change this option):
 AC and DC outputs
+
+## Reliable BLE connection
+
+Home Assistant emits a warning if `BleakClient.connect()` is called directly:
+
+"BleakClient.connect() called without bleak-retry-connector. For reliable connection establishment, use bleak_retry_connector.establish_connection()."
+
+This integration now uses `bleak-retry-connector` to establish BLE connections with retry and service cache. This reduces transient connection failures and improves stability.
