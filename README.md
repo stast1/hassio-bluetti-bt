@@ -1,4 +1,4 @@
-# hassio-bluetti-bt (Version 0.1.5-fork.1)
+# hassio-bluetti-bt (Version 0.1.5-fork.2)
 [![hacs_badge](https://img.shields.io/badge/HACS-Default-41BDF5.svg)](https://github.com/hacs/integration)
 [![Validate with hassfest](https://github.com/Patrick762/hassio-bluetti-bt/actions/workflows/hassfest_validation.yml/badge.svg)](https://github.com/Patrick762/hassio-bluetti-bt/actions/workflows/hassfest_validation.yml)
 [![HACS Action](https://github.com/Patrick762/hassio-bluetti-bt/actions/workflows/HACS.yml/badge.svg)](https://github.com/Patrick762/hassio-bluetti-bt/actions/workflows/HACS.yml)
@@ -36,7 +36,9 @@ After the installation, you can use this button to install the integration:
 If enabled in the Integration options (you need to reload the integration if you change this option):
 AC and DC outputs
 
-## Reliable BLE connection
+## fork.1 Changes
+
+### Reliable BLE connection
 
 Home Assistant emits a warning if `BleakClient.connect()` is called directly:
 
@@ -44,7 +46,7 @@ Home Assistant emits a warning if `BleakClient.connect()` is called directly:
 
 This integration now uses `bleak-retry-connector` to establish BLE connections with retry and service cache. This reduces transient connection failures and improves stability.
 
-## Reloading the integration
+### Reloading the integration
 
 The integration now supports reloading from the Home Assistant UI. This allows you to:
 
@@ -60,3 +62,19 @@ To reload the integration:
 4. Select **Reload**
 
 The integration will cleanly disconnect from the device, unload all entities, and then reconnect with the current configuration.
+
+## fork.2 Changes
+
+This fork iteration focuses on Bluetooth connection stability and clearer diagnostics:
+
+### Fixes & Improvements
+* Fixed persistent connection not recovering after device power cycle by fully resetting notification handler state on reconnect.
+* Converted transient polling timeouts into warnings (instead of errors) to reduce log noise when device is temporarily unreachable.
+* Added consistent debug logging when specific field data is missing (sensors, binary_sensors, switches).
+* Unified availability handling: entities now properly go unavailable on BLE disconnect in persistent mode and recover automatically.
+
+### Notes
+If you use Bluetooth proxies and see repeated Bleak errors about connection slots, consider adding another proxy closer to the device. Occasional timeout warnings are expected if the station is sleeping or powered off.
+
+### Upgrade Guidance
+No configuration changes required. A simple reload (or restart) applies the new behavior. Persistent connection mode is now recommended if you prefer faster recovery after power cycles.
