@@ -1,4 +1,4 @@
-# hassio-bluetti-bt (Version 0.1.6-fork.2)
+# hassio-bluetti-bt (Version 0.1.6-fork.3)
 [![hacs_badge](https://img.shields.io/badge/HACS-Default-41BDF5.svg)](https://github.com/hacs/integration)
 [![Validate with hassfest](https://github.com/Patrick762/hassio-bluetti-bt/actions/workflows/hassfest_validation.yml/badge.svg)](https://github.com/Patrick762/hassio-bluetti-bt/actions/workflows/hassfest_validation.yml)
 [![HACS Action](https://github.com/Patrick762/hassio-bluetti-bt/actions/workflows/HACS.yml/badge.svg)](https://github.com/Patrick762/hassio-bluetti-bt/actions/workflows/HACS.yml)
@@ -17,6 +17,7 @@ After the installation, you can use this button to install the integration:
 ### Supported devices:
 
 - AC2A
+- AC2P
 - AC60 (tested with one external battery B80)
 - AC60P (untested)
 - AC70 (basic data)
@@ -81,3 +82,7 @@ If you use Bluetooth proxies and see repeated Bleak errors about connection slot
 
 ### Upgrade Guidance
 No configuration changes required. A simple reload (or restart) applies the new behavior. Persistent connection mode is now recommended if you prefer faster recovery after power cycles.
+
+## fork.3 Changes
+
+Added AC2P support. Sensors only, no controls.
